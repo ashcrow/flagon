@@ -30,11 +30,15 @@ handler.setFormatter(logging.Formatter(
 logger.handlers.append(handler)
 logger.setLevel(logging.DEBUG)
 
+# --- FLAGON SPECIFIC CODE ---
 # Make a backend
 backend = JSONFileBackend('example/config.json')
 
 # Make the decorator
 feature = create_decorator(backend, logger)
+# --- END FLAGON SPECIFIC CODE---
+
+# Now to use flagon for feature flagging
 
 @feature('test')
 def t(a):
