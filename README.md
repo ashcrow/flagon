@@ -9,7 +9,7 @@ Example
 -------
 (Run python src/flagon/feature.py to see results)
 
-``python
+```python
 # Example
 
 # Make a logger
