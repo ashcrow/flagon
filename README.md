@@ -15,6 +15,9 @@ Ideas
 
 Example
 -------
+Configuration file: https://github.com/ashcrow/flagon/blob/master/example/config.json
+
+
 ```python
 # Example
 
