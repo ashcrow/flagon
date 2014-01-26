@@ -5,10 +5,16 @@ Feature flags for python.
 
 **Note**: This is mainly experimenting to find the best method for Python feature flagging.
 
+
+Ideas
+-----
+* Pluggable configuration backends
+* Support for default fallback calls
+* Logging support
+
+
 Example
 -------
-(Run python src/flagon/feature.py to see results)
-
 ```python
 # Example
 
@@ -51,4 +57,23 @@ try:
         print a
 except errors.UnknownFeatureError, ufe:
     print type(ufe), ufe
+```
+
+Example Results
+---------------
+
+```
+warnings.warn('JSONFileBackend is not safe for multi-write environments')
+flagon - DEBUG - The feature decorator for flagon has been created with JSONFileBackend
+
+* Executing feature 'test' with 'asd':
+asd
+
+* Executing feature 'off' (which is turned off) with 'asd'
+flagon - WARNING - Disabled featured off was requested
+<type 'exceptions.NameError'> name 'off' is not enabled
+
+* Defining 'doesnotexist' (which is not a configured feature)
+flagon - ERROR - An unknown feature was requested: doesntexist
+<class 'flagon.errors.UnknownFeatureError'> Unknown feature: doesntexist
 ```
