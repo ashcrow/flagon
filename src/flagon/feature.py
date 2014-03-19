@@ -1,3 +1,4 @@
+import logging
 
 from functools import wraps
 
@@ -27,6 +28,11 @@ def create_decorator(backend, logger):
                     logger.warn(
                         'Disabled featured %s was requested.'
                         ' Using default.' % name)
+                    if logging.getLevelName(logger.level) == 'DEBUG':
+                        import inspect
+                        logger.debug('%s default=%s:%s(*%s, **%s)' % (
+                            name, inspect.getabsfile(default),
+                            default.__name__, args, kwargs))
                     return default(*args, **kwargs)
                 else:
                     logger.warn('Disabled featured %s was requested' % name)

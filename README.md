@@ -93,6 +93,7 @@ flagon - WARNING - Disabled featured off was requested
 
 * Executing feature 'withdefault' (which is turned off) which passed a default implementation of the t function.
 flagon - WARNING - Disabled featured withdefault was requested. Using default.
+flagon - DEBUG - withdefault default=/home/steve/Tech/flagon/src/flagon/feature.py:t(*('asd',), **{})
 FROM t() asd
 
 * Defining 'doesnotexist' (which is not a configured feature)
