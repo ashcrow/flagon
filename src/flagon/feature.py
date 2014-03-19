@@ -15,6 +15,9 @@ def create_decorator(backend, logger):
         backend.__class__.__name__))
 
     def feature(name, default=None):
+        """
+        Outside decorator used to wrap a function.
+        """
         if not backend.exists(name):
             logger.error('An unknown feature was requested: %s' % name)
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
