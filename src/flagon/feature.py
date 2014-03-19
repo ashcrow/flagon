@@ -3,8 +3,6 @@ from functools import wraps
 
 from flagon import errors
 
-from flagon.backends.jsonfile import JSONFileBackend
-
 
 def create_decorator(backend, logger):
     """
@@ -25,9 +23,13 @@ def create_decorator(backend, logger):
             def wrapper(*args, **kwargs):
                 if backend.is_on(name):
                     return func(*args, **kwargs)
-                logger.warn('Disabled featured %s was requested' % name)
                 if default:
+                    logger.warn(
+                        'Disabled featured %s was requested.'
+                        ' Using default.' % name)
                     return default(*args, **kwargs)
+                else:
+                    logger.warn('Disabled featured %s was requested' % name)
                 raise NameError("name '%s' is not enabled" % name)
             return wrapper
         return deco
@@ -47,6 +49,7 @@ if __name__ == '__main__':
     logger.setLevel(logging.DEBUG)
 
     # --- FLAGON SPECIFIC CODE ---
+    from flagon.backends.jsonfile import JSONFileBackend
     # Make a backend
     backend = JSONFileBackend('example/config.json')
 
@@ -58,20 +61,29 @@ if __name__ == '__main__':
 
     @feature('test')
     def t(a):
-        print a
+        print "FROM t()", a
 
     print "\n* Executing feature 'test' with 'asd': "
     t('asd')
 
     @feature('off')
     def o(a):
-        print a
+        print "FROM a()", a
+
+    @feature('withdefault', default=t)
+    def v(a):
+        print "FROM v()", a
 
     print "\n* Executing feature 'off' (which is turned off) with 'asd'"
     try:
         o('asd')
     except NameError, ne:
         print type(ne), ne
+
+    print (
+        "\n* Executing feature 'withdefault' (which is turned off) "
+        "which passed a default implementation of the t function.")
+    v('asd')
 
     print "\n* Defining 'doesnotexist' (which is not a configured feature)"
     try:
