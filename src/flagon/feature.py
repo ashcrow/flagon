@@ -5,44 +5,52 @@ from functools import wraps
 from flagon import errors
 
 
-def create_decorator(backend, logger):
+class Feature(object):
     """
-    Creates a decorator using the given backend and logger.
+    The feature manager.
     """
 
-    logger.debug(
-        'The feature decorator for flagon has been created with %s' % (
-        backend.__class__.__name__))
+    def __init__(self, backend, logger):
+        self.backend = backend
+        self.logger = logger
+        self.logger.debug(
+            'The feature decorator for flagon has been created with %s' % (
+            backend.__class__.__name__))
 
-    def feature(name, default=None):
+    def __call__(self, name, default=None):
         """
-        Outside decorator used to wrap a function.
+        What acts as a decorator.
+
+        name is the name of the feature.
+        default is the default callable to fall back to.
         """
-        if not backend.exists(name):
-            logger.error('An unknown feature was requested: %s' % name)
+        if not self.backend.exists(name):
+            self.logger.error('An unknown feature was requested: %s' % name)
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
 
         def deco(func):
             @wraps(func)
             def wrapper(*args, **kwargs):
-                if backend.is_on(name):
+                if self.backend.is_on(name):
                     return func(*args, **kwargs)
                 if default:
-                    logger.warn(
+                    self.logger.warn(
                         'Disabled featured %s was requested.'
                         ' Using default.' % name)
-                    if logging.getLevelName(logger.level) == 'DEBUG':
+                    if logging.getLevelName(self.logger.level) == 'DEBUG':
                         import inspect
-                        logger.debug('%s default=%s:%s(*%s, **%s)' % (
+                        self.logger.debug('%s default=%s:%s(*%s, **%s)' % (
                             name, inspect.getabsfile(default),
                             default.__name__, args, kwargs))
                     return default(*args, **kwargs)
                 else:
-                    logger.warn('Disabled featured %s was requested' % name)
+                    self.logger.warn('Disabled featured %s was requested' % (
+                        name))
                 raise NameError("name '%s' is not enabled" % name)
             return wrapper
         return deco
-    return feature
+
+    is_active = lambda s, name: s.backend.is_on(name)
 
 
 if __name__ == '__main__':
@@ -63,7 +71,7 @@ if __name__ == '__main__':
     backend = JSONFileBackend('example/config.json')
 
     # Make the decorator
-    feature = create_decorator(backend, logger)
+    feature = Feature(backend, logger)
     # --- END FLAGON SPECIFIC CODE---
 
     # Now to use flagon for feature flagging

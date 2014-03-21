@@ -36,7 +36,7 @@ from flagon.backends.jsonfile import JSONFileBackend
 backend = JSONFileBackend('example/config.json')
 
 # Make the decorator
-feature = create_decorator(backend, logger)
+feature = Feature(backend, logger)
 # --- END FLAGON SPECIFIC CODE---
 
 # Now to use flagon for feature flagging
