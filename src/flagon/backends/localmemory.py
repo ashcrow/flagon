@@ -38,7 +38,7 @@ class LocalMemoryBackend(Backend):
         """
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        if self._store[name]:
+        if self._store[name]['active']:
             return True
         return False
 
