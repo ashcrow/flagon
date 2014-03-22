@@ -38,7 +38,7 @@ class Feature(object):
         def deco(func):
             @wraps(func)
             def wrapper(*args, **kwargs):
-                if self.backend.is_on(name):
+                if self.backend.is_active(name):
                     self.logger.debug('%s func=%s:%s(*%s, **%s)' % (
                         name, inspect.getabsfile(func),
                         func.__name__, args, kwargs))
@@ -59,7 +59,7 @@ class Feature(object):
             return wrapper
         return deco
 
-    is_active = lambda s, name: s.backend.is_on(name)
+    is_active = lambda s, name: s.backend.is_active(name)
 
 
 if __name__ == '__main__':

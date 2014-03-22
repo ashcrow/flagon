@@ -31,7 +31,7 @@ class SQLAlchemyBackend(Backend):
     def exists(self, name):
         return bool(self._session.query(Feature).filter_by(name=name).count())
 
-    def is_on(self, name):
+    def is_active(self, name):
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
         feature = self._session.query(Feature).filter_by(name=name).first()

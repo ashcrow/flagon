@@ -14,11 +14,11 @@ class Backend(object):
         """
         raise NotImplementedError('exists must be implemented.')
 
-    def is_on(self, name):
+    def is_active(self, name):
         """
         Checks if a feature is on.
         """
-        raise NotImplementedError('is_on must be implemented.')
+        raise NotImplementedError('is_active must be implemented.')
 
     def turn_on(self, name):
         """
@@ -36,7 +36,7 @@ class Backend(object):
         """
         Toggles a feature.
         """
-        if self.is_on(name):
+        if self.is_active(name):
             self.turn_off(name)
         else:
             self.turn_on(name)
@@ -45,4 +45,4 @@ class Backend(object):
         """
         Checks if a feature is off.
         """
-        return not self.is_on(name)
+        return not self.is_active(name)

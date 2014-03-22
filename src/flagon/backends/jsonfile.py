@@ -26,7 +26,7 @@ class JSONFileBackend(Backend):
     def exists(self, name):
         return name in self._read_file().keys()
 
-    def is_on(self, name):
+    def is_active(self, name):
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
         if self._read_file()[name]:
