@@ -15,21 +15,27 @@ class Feature(object):
         """
         Creates the feature manager.
 
-        backend is the backend to use for storing feature states.
-        logger is the logger like object to use for logging.
+        :param backend: the backend to use for storing feature states.
+        :type backend: flagon.backends.Backend
+        :param logger: the logger like object to use for logging.
+        :type logger: logging.Logger
+        :rtype: Feature
         """
         self.backend = backend
         self.logger = logger
         self.logger.debug(
             'The feature decorator for flagon has been created with %s' % (
-            backend.__class__.__name__))
+                backend.__class__.__name__))
 
     def __call__(self, name, default=None):
         """
         What acts as a decorator.
 
-        name is the name of the feature.
-        default is the default callable to fall back to.
+        :param name: the name of the feature.
+        :type name: str
+        :param default: the default callable to fall back to.
+        :type default: callable or None
+        :rtype: callable
         """
         if not self.backend.exists(name):
             self.logger.error('An unknown feature was requested: %s' % name)
@@ -66,7 +72,6 @@ if __name__ == '__main__':
     # Example
 
     # Make a logger
-    import logging
     logger = logging.getLogger('flagon')
     handler = logging.StreamHandler()
     handler.setFormatter(logging.Formatter(
