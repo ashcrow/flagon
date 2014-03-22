@@ -1,3 +1,4 @@
+import inspect
 import logging
 
 from functools import wraps
@@ -11,6 +12,12 @@ class Feature(object):
     """
 
     def __init__(self, backend, logger):
+        """
+        Creates the feature manager.
+
+        backend is the backend to use for storing feature states.
+        logger is the logger like object to use for logging.
+        """
         self.backend = backend
         self.logger = logger
         self.logger.debug(
@@ -32,13 +39,15 @@ class Feature(object):
             @wraps(func)
             def wrapper(*args, **kwargs):
                 if self.backend.is_on(name):
+                    self.logger.debug('%s func=%s:%s(*%s, **%s)' % (
+                        name, inspect.getabsfile(func),
+                        func.__name__, args, kwargs))
                     return func(*args, **kwargs)
                 if default:
                     self.logger.warn(
                         'Disabled featured %s was requested.'
                         ' Using default.' % name)
                     if logging.getLevelName(self.logger.level) == 'DEBUG':
-                        import inspect
                         self.logger.debug('%s default=%s:%s(*%s, **%s)' % (
                             name, inspect.getabsfile(default),
                             default.__name__, args, kwargs))

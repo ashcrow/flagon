@@ -1,10 +1,8 @@
 flagon
 ======
 
-Generic feature flags for python.
-
-**Note**: This is mainly experimenting to find the best method for Python feature flagging.
-
+Generic feature flags for python which attempts to be compatible with Java's Togglz (http://www.togglz.org/
+).
 
 Ideas
 -----
