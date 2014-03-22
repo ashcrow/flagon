@@ -7,6 +7,7 @@ try:
 except ImportError:
     import simplejson as json
 
+from flagon import errors
 from flagon.backends import Backend
 
 
@@ -29,7 +30,7 @@ class JSONFileBackend(Backend):
     def is_active(self, name):
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        if self._read_file()[name]:
+        if self._read_file()[name]['active']:
             return True
         return False
 
@@ -37,7 +38,7 @@ class JSONFileBackend(Backend):
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
         data = self._read_file()
-        data[name] = True
+        data[name]['active'] = True
         self._write_file(data)
 
     def turn_off(self, name):
@@ -45,5 +46,5 @@ class JSONFileBackend(Backend):
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
         data = self._read_file()
-        data[name] = False
+        data[name]['active'] = False
         self._write_file(data)

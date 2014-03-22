@@ -1,5 +1,17 @@
 {
-    "test": true,
-    "off": false,
-    "withdefault": false
+    "test": {
+    	"active": true,
+    	"strategy": null,
+    	"params": {}
+    },
+    "off": {
+    	"active": false,
+    	"strategy": null,
+    	"params": {}
+    },
+    "withdefault": {
+    	"active": false,
+    	"strategy": null,
+    	"params": {}
+    }
 }
