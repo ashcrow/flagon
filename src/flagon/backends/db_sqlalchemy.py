@@ -1,5 +1,6 @@
-from sqlalchemy import Column, SmallInteger, String, create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import (
+    Column, Integer, SmallInteger, String, ForeignKey, create_engine)
+from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 from flagon import errors
@@ -13,7 +14,18 @@ class Feature(Base):
     __tablename__ = 'features'
 
     name = Column(String, primary_key=True)
-    on = Column(SmallInteger)
+    active = Column(SmallInteger)
+    strategy = Column(String)
+    params = relationship('Param', backref='feature')
+
+
+class Param(Base):
+    __tablename__ = 'params'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    value = Column(String)
+    feature_id = Column(Integer, ForeignKey('features.name'))
 
 
 class SQLAlchemyBackend(Backend):
@@ -50,7 +62,7 @@ class SQLAlchemyBackend(Backend):
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
         feature = self._session.query(Feature).filter_by(name=name).first()
-        return bool(feature.on)
+        return bool(feature.active)
 
     def turn_on(self, name):
         """
@@ -61,7 +73,7 @@ class SQLAlchemyBackend(Backend):
         """
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        self._session.merge(Feature(name=name, on=1))
+        self._session.merge(Feature(name=name, active=1))
         self._session.commit()
 
     def turn_off(self, name):
@@ -74,5 +86,5 @@ class SQLAlchemyBackend(Backend):
         # TODO: Copy paste --- :-(
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        self._session.merge(Feature(name=name, on=0))
+        self._session.merge(Feature(name=name, active=0))
         self._session.commit()
