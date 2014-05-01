@@ -65,29 +65,19 @@ class JSONFileBackend(Backend):
             return True
         return False
 
-    def turn_on(self, name):
+    def _turn(self, name, value):
         """
-        Turns a feature on.
+        Turns a feature on or off
 
         :param name: name of the feature.
+        :param value: Value to turn name to.
         :raises: UnknownFeatureError
         """
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
         data = self._read_file()
-        data[name]['active'] = True
+        data[name]['active'] = bool(value)
         self._write_file(data)
 
-    def turn_off(self, name):
-        """
-        Turns a feature off.
-
-        :param name: name of the feature.
-        :raises: UnknownFeatureError
-        """
-        # TODO: Copy paste --- :-(
-        if not self.exists(name):
-            raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        data = self._read_file()
-        data[name]['active'] = False
-        self._write_file(data)
+    turn_on = lambda s, name: _turn(s, name, True)
+    turn_off = lambda s, name: _turn(s, name, False)

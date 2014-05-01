@@ -64,27 +64,31 @@ class SQLAlchemyBackend(Backend):
         feature = self._session.query(Feature).filter_by(name=name).first()
         return bool(feature.active)
 
-    def turn_on(self, name):
+    def _turn(self, name, value):
+        """
+        Turns a feature on or off
+
+        :param name: name of the feature.
+        :raises: UnknownFeatureError
+        """
+        if not self.exists(name):
+            raise errors.UnknownFeatureError('Unknown feature: %s' % name)
+        data = self._read_file()
+        data[name]['active'] = bool(value)
+        self._write_file(data)
+
+    def _turn(self, name, value):
         """
         Turns a feature on.
 
         :param name: name of the feature.
+        :param value: 0 or 1
         :raises: UnknownFeatureError
         """
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        self._session.merge(Feature(name=name, active=1))
+        self._session.merge(Feature(name=name, active=value))
         self._session.commit()
 
-    def turn_off(self, name):
-        """
-        Turns a feature off.
-
-        :param name: name of the feature.
-        :raises: UnknownFeatureError
-        """
-        # TODO: Copy paste --- :-(
-        if not self.exists(name):
-            raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        self._session.merge(Feature(name=name, active=0))
-        self._session.commit()
+    turn_on = lambda s, name: _turn(s, name, 1)
+    turn_off = lambda s, name: _turn(s, name, 2)

@@ -42,27 +42,18 @@ class LocalMemoryBackend(Backend):
             return True
         return False
 
-    def turn_on(self, name):
-        """
-        Turns a feature on.
-
-        :param name: name of the feature.
-        :raises: UnknownFeatureError
-        """
-        if not self.exists(name):
-            raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        self._store[name] = True
-        self._write_file()
-
-    def turn_off(self, name):
+    def _turn(self, name, value):
         """
         Turns a feature off.
 
         :param name: name of the feature.
+        :param value: Value to turn name to.
         :raises: UnknownFeatureError
         """
         # TODO: Copy paste --- :-(
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        self._store[name] = False
-        self._write_file()
+        self._store[name] = bool(value)
+
+    turn_on = lambda s, name: _turn(s, name, True)
+    turn_off = lambda s, name: _turn(s, name, False)

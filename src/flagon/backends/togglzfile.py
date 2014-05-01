@@ -66,29 +66,19 @@ class TogglzFileBackend(Backend):
             return True
         return False
 
-    def turn_on(self, name):
+    def _turn(self, name, value):
         """
-        Turns a feature on.
+        Turns a feature to value.
 
         :param name: name of the feature.
+        :param value: Value to turn name to ("true"/"false").
         :raises: UnknownFeatureError
         """
         name = name.upper()
         if not self.exists(name):
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        self._store[name] = 'true'
+        self._store[name] = value
         self._write_file()
 
-    def turn_off(self, name):
-        """
-        Turns a feature off.
-
-        :param name: name of the feature.
-        :raises: UnknownFeatureError
-        """
-        # TODO: Copy paste --- :-(
-        name = name.upper()
-        if not self.exists(name):
-            raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        self._store[name] = 'false'
-        self._write_file()
+    turn_on = lambda s, name: _turn(s, name, 'true')
+    turn_off = lambda s, name: _turn(s, name, 'false')
