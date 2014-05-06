@@ -1,5 +1,7 @@
 flagon
 ======
+[![Build Status](https://api.travis-ci.org/ashcrow/flagon.png)](https://travis-ci.org/ashcrow/flagon/)
+
 
 Generic feature flags for python which attempts to be compatible with Java's Togglz (http://www.togglz.org/
 ).
