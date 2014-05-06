@@ -1,0 +1,5 @@
+SQLAlchemy
+configobj
+pep8
+nose
+coverage
