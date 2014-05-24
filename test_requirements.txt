@@ -1,4 +1,5 @@
 SQLAlchemy
+Django
 configobj
 pep8
 nose
