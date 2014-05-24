@@ -2,25 +2,7 @@ from django.db import models
 
 from flagon import errors
 from flagon.backends import Backend
-
-
-class FlagonParams(models.Model):
-    """
-    Parameters for a feature.
-    """
-    key = models.CharField(max_length=255)
-    value = models.TextField()
-    type = models.CharField(max_length=30)
-
-
-class FlagonFeature(models.Model):
-    """
-    A feature.
-    """
-    name = models.CharField(max_length=255)
-    active = models.BooleanField()
-    strategy = models.CharField(max_length=255, null=True)
-    params = models.ForeignKey(FlagonParams)
+from flagon.backends.db_django.models import FlagonParams, FlagonFeature
 
 
 class DjangoORMBackend(Backend):
