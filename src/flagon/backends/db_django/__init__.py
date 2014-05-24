@@ -49,5 +49,5 @@ class DjangoORMBackend(Backend):
         except FlagonFeature.DoesNotExist:
             raise errors.UnknownFeatureError('Unknown feature: %s' % name)
 
-    turn_on = lambda s, name: _turn(s, name, True)
-    turn_off = lambda s, name: _turn(s, name, False)
+    turn_on = lambda s, name: s._turn(name, True)
+    turn_off = lambda s, name: s._turn(name, False)

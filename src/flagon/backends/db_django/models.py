@@ -24,7 +24,7 @@ class FlagonFeature(models.Model):
     name = models.CharField(max_length=255)
     active = models.BooleanField()
     strategy = models.CharField(max_length=255, blank=True, null=True)
-    params = models.ForeignKey(FlagonParams)
+    params = models.ForeignKey(FlagonParams, null=True)
 
     def __repr__(self):
         return unicode(self.name)
