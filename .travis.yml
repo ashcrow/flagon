@@ -6,5 +6,6 @@ install:
 script:
     - "pep8 src/"
     - "nosetests -v --with-cover --cover-min-percentage=80 --cover-package=flagon test/"
+    - "PYTHONPATH=src/ ./example/djproject/manage.py test -v 2 test --pattern=test_backend_db_django.py"
 notifications:
     email: false
