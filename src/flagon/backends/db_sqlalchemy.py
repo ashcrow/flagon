@@ -66,19 +66,6 @@ class SQLAlchemyBackend(Backend):
 
     def _turn(self, name, value):
         """
-        Turns a feature on or off
-
-        :param name: name of the feature.
-        :raises: UnknownFeatureError
-        """
-        if not self.exists(name):
-            raise errors.UnknownFeatureError('Unknown feature: %s' % name)
-        data = self._read_file()
-        data[name]['active'] = bool(value)
-        self._write_file(data)
-
-    def _turn(self, name, value):
-        """
         Turns a feature on.
 
         :param name: name of the feature.

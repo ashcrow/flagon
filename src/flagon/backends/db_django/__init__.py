@@ -1,8 +1,7 @@
-from django.db import models
 
 from flagon import errors
 from flagon.backends import Backend
-from flagon.backends.db_django.models import FlagonParams, FlagonFeature
+from flagon.backends.db_django.models import FlagonFeature
 
 
 class DjangoORMBackend(Backend):
