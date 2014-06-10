@@ -11,7 +11,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='flagon',
-    version='%VERSION%-%RELEASE%',
+    version='%VERSION%',
     author='Steve Milner',
     url='https://github.com/ashcrow/flagon',
     license='MIT',
