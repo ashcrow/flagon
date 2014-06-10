@@ -3,11 +3,16 @@ import memcache
 from flagon import errors
 from flagon.backends import Backend
 
+
 class MemcachedBackend(Backend):
     """Memcache Backend for flagon"""
+
     def __init__(self, hostname="127.0.0.1", port="11211"):
+        """
+        Creates an instance of the MemcacheBackend.
+        """
         self.hostname = "%s:%s" % (hostname, port)
-        self.server   = memcache.Client([self.hostname])
+        self.server = memcache.Client([self.hostname])
 
     def exists(self, name):
         """
