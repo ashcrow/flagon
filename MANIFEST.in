@@ -3,8 +3,10 @@ include MANIFEST.in
 include README.md
 include setup.py
 include AUTHORS
+include VERSION
 include CONTRIBUTING.md
 include test_requirements.txt
 recursive-include test *
 recursive-include example *
 recursive-include doc *
+recursive-include contrib *
