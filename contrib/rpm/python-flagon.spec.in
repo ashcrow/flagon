@@ -12,7 +12,7 @@ Summary:        Feature flags for python
 
 License:        MIT
 URL:            https://github.com/ashcrow/flagon
-Source0:        %{version}-%{_short_release}.tar.gz
+Source0:        %{_pkg_name}-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  python-devel
@@ -24,7 +24,7 @@ Generic feature flags for Python which attempts to be compatible with
 Java's Togglz.
 
 %prep
-%setup -q -n %{_pkg_name}-%{version}-%{_short_release}
+%setup -q -n %{_pkg_name}-%{version}
 
 %build
 %{__python2} setup.py build

@@ -83,7 +83,7 @@ sdist: setup.py clean
 
 rpmcommon: $(RPMSPECDIR)/$(PKGNAME).spec sdist
 	@mkdir -p rpm-build
-	@cp dist/$(NAME)-$(VERSION)-$(RPMRELEASE).tar.gz rpm-build/$(VERSION)-$(RPMRELEASE).tar.gz
+	@cp dist/$(NAME)-$(VERSION).tar.gz rpm-build/$(NAME)-$(VERSION).tar.gz
 
 srpm: rpmcommon
 	@rpmbuild --define "_topdir %(pwd)/rpm-build" \
