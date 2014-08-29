@@ -6,7 +6,7 @@
 %global _short_release 1
 
 Name:           python-flagon
-Version:        0.0.1
+Version:        0.0.2
 Release:        %{_short_release}%{?dist}
 Summary:        Feature flags for python
 
@@ -38,5 +38,7 @@ Java's Togglz.
 %{python2_sitelib}/*
 
 %changelog
+* Fri Aug 29 2014 Steve Milner <stevem@gnulinux.net> - 0.0.2-1
+- Update for upstream release.
 * Tue Jun 10 2014 Tim Bielawa <tbielawa@redhat.com> - 0.0.1-1
 - First release

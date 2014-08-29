@@ -22,9 +22,9 @@ class FlagonFeature(models.Model):
     A feature.
     """
     name = models.CharField(max_length=255)
-    active = models.BooleanField()
+    active = models.BooleanField(default=False)
     strategy = models.CharField(max_length=255, blank=True, null=True)
-    params = models.ForeignKey(FlagonParams, null=True)
+    params = models.ForeignKey(FlagonParams, null=True, blank=True)
 
     def __repr__(self):
         return unicode(self.name)

@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'flagon.backends.db_django'
+    'flagon.backends.db_django',
 )
 
 MIDDLEWARE_CLASSES = (

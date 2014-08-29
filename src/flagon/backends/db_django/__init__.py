@@ -4,6 +4,10 @@ from flagon.backends import Backend
 from flagon.backends.db_django.models import FlagonFeature
 
 
+# Naming for Django 1.7+
+default_app_config = 'flagon.backends.db_django.apps.FlagonConfig'
+
+
 class DjangoORMBackend(Backend):
 
     def exists(self, name):
