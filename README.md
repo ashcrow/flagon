@@ -18,6 +18,7 @@ Example
 * Code: https://github.com/ashcrow/flagon/blob/master/example/example.py
 * Config: https://github.com/ashcrow/flagon/blob/master/example/config.json
 * Results: https://github.com/ashcrow/flagon/blob/master/example/results.txt
+* Django Example: https://github.com/ashcrow/flagon/tree/master/example/djproject
 
 Status API
 ----------
