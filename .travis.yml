@@ -6,6 +6,6 @@ install:
 script:
     - "pep8 src/"
     - "nosetests -v --with-cover --cover-min-percentage=80 --cover-package=flagon test/"
-    - "PYTHONPATH=src/ python ./example/djproject/manage.py test -v 2'
+    - "PYTHONPATH=src/ python ./example/djproject/manage.py test -v 2"
 notifications:
     email: false
