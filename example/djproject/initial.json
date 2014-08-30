@@ -1,0 +1,1 @@
+[{"fields": {"active": true, "params": null, "name": "OLD_INDEX", "strategy": ""}, "model": "db_django.flagonfeature", "pk": 1}, {"fields": {"active": false, "params": null, "name": "FORMAL_GREETING", "strategy": ""}, "model": "db_django.flagonfeature", "pk": 2}]

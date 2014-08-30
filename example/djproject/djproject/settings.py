@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'flagon.backends.db_django',
+    'djproject',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -76,6 +77,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Feature flags
+import logging
+from flagon.backends.db_django import DjangoORMBackend
+from flagon.feature import Feature
+# Make a backend
+FEATURES = DjangoORMBackend()
+FEATURE = Feature(FEATURES, logging.getLogger())
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
