@@ -20,6 +20,7 @@ feature = Feature(backend, logger)
 
 # Now to use flagon for feature flagging
 
+
 @feature('test')
 def t(a):
     print "FROM t()", a
@@ -27,9 +28,11 @@ def t(a):
 print "\n* Executing feature 'test' with 'asd': "
 t('asd')
 
+
 @feature('off')
 def o(a):
     print "FROM a()", a
+
 
 @feature('withdefault', default=t)
 def v(a):

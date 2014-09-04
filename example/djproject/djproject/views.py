@@ -13,7 +13,7 @@ def index(request):
 
 
 def hello(request):
-    if settings.FEATURES.is_active('FORMAL_GREETINGS', if_unknown=False):
+    if settings.FEATURES.is_active('FORMAL_GREETING'):
         return HttpResponse("Good day, sir!")
     else:
         return HttpResponse("Sup, guy?")
