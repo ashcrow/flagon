@@ -40,7 +40,6 @@ class MongoDBBackend(Backend):
         Creates an instance of the MongoDBBackend.
         """
         self._connection = pymongo.MongoClient(connection_str)
-        print self._connection
         self._db = self._connection[database]
         self._collection = self._db[collection]
 
