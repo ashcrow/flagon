@@ -4,3 +4,4 @@ configobj
 pep8
 nose
 coverage
+pymongo
