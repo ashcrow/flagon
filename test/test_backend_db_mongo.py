@@ -22,21 +22,21 @@
 
 from . import TestCase
 
-from flagon.backends.mongodb import MongoDBBackend
+from flagon.backends.db_mongo import MongoDBBackend
 
 import mock
 
 
 class TestMongoDBBackend(TestCase):
     """
-    Test the mongodb backend class.
+    Test the mongo database backend class.
     """
 
     def setUp(self):
         """
         Set up some items we can reuse.
         """
-        with mock.patch('flagon.backends.mongodb.pymongo.MongoClient') as _mc:
+        with mock.patch('flagon.backends.db_mongo.pymongo.MongoClient') as _mc:
             self._mc = _mc
             self._mc()['flagon']['features'].find().count.return_value = 1
             self.backend = MongoDBBackend()
