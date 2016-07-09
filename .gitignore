@@ -37,3 +37,5 @@ nosetests.xml
 *~
 cover
 rpm-build
+
+.idea/
