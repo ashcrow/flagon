@@ -39,3 +39,4 @@ cover
 rpm-build
 
 .idea/
+venv/

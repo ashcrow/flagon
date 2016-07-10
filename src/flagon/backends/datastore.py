@@ -42,6 +42,7 @@ class DatastoreBackend(Backend):
     def __init__(self):
         pass
 
+    @ndb.non_transactional
     def exists(self, name):
         """
         Checks if a feature exists.
@@ -55,6 +56,7 @@ class DatastoreBackend(Backend):
         else:
             return True
 
+    @ndb.non_transactional
     def is_active(self, name):
         """
         Checks if a feature is on.
@@ -70,6 +72,7 @@ class DatastoreBackend(Backend):
         else:
             return ft.enabled
 
+    @ndb.non_transactional
     def _turn(self, name, value):
         """
         Turns a feature off.
