@@ -103,5 +103,5 @@ class JSONFileBackend(Backend):
         data[name]['active'] = bool(value)
         self._write_file(data)
 
-    turn_on = lambda s, name: _turn(s, name, True)
-    turn_off = lambda s, name: _turn(s, name, False)
+    turn_on = lambda s, name: s._turn(name, True)
+    turn_off = lambda s, name: s._turn(name, False)

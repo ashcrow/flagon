@@ -4,7 +4,7 @@
 #
 # useful targets (not all implemented yet!):
 #   make clean ------------------- Clean up garbage
-#   make pyflakes/pep8/coverage -- source code checks
+#   make flake8/coverage -- source code checks
 #   make tests ------------------- run all unit tests (export LOG=true for /tmp/ logging)
 
 ########################################################
@@ -48,32 +48,26 @@ setup.py: setup.py.in VERSION $(RPMSPECDIR)/$(PKGNAME).spec.in
 tag:
 	git tag -s -m $(TAG) $(TAG)
 
-tests: coverage pep8 pyflakes
-	:
+test: tests
+
+tests: coverage flake8
 
 coverage:
 	@echo "#############################################"
 	@echo "# Running Unit + Coverage Tests"
 	@echo "#############################################"
-	nosetests -v --with-cover --cover-min-percentage=80 --cover-package=flagon test/
+	python setup.py nosetests
 
 clean:
 	@find . -type f -regex ".*\.py[co]$$" -delete
 	@find . -type f \( -name "*~" -or -name "#*" \) -delete
 	@rm -fR build cover dist rpm-build MANIFEST htmlcov .coverage flagon.egg-info
 
-pep8:
+flake8:
 	@echo "#############################################"
-	@echo "# Running PEP8 Compliance Tests"
+	@echo "# Running flake8 Compliance Tests"
 	@echo "#############################################"
-	pep8 --ignore=E501,E121,E124 src/flagon/
-
-pyflakes:
-	@echo "#############################################"
-	@echo "# Running Pyflakes Sanity Tests"
-	@echo "# Note: most import errors may be ignored"
-	@echo "#############################################"
-	-pyflakes src/flagon
+	python setup.py flake8
 
 install: clean
 	python ./setup.py install

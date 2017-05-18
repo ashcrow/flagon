@@ -3,10 +3,8 @@ python:
     - "3.3"
     - "2.7"
 install:
-    - "pip install -r test_requirements.txt --use-mirrors"
+    - "pip install -r test-requirements.txt"
 script:
-    - "pep8 src/"
-    - "nosetests -v --with-cover --cover-min-percentage=80 --cover-package=flagon test/"
-    - "PYTHONPATH=src/ python ./example/djproject/manage.py test -v 2"
+    - "make test"
 notifications:
     email: false

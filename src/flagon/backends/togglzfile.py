@@ -104,5 +104,5 @@ class TogglzFileBackend(Backend):
         self._store[name] = value
         self._write_file()
 
-    turn_on = lambda s, name: _turn(s, name, 'true')
-    turn_off = lambda s, name: _turn(s, name, 'false')
+    turn_on = lambda s, name: s._turn(name, 'true')
+    turn_off = lambda s, name: s._turn(name, 'false')

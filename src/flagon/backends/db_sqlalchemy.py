@@ -102,5 +102,5 @@ class SQLAlchemyBackend(Backend):
         self._session.merge(Feature(name=name, active=value))
         self._session.commit()
 
-    turn_on = lambda s, name: _turn(s, name, 1)
-    turn_off = lambda s, name: _turn(s, name, 2)
+    turn_on = lambda s, name: s._turn(name, 1)
+    turn_off = lambda s, name: s._turn(name, 2)

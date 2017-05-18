@@ -22,6 +22,7 @@
 """
 Admin configuration.
 """
+
 from django.contrib import admin
 
 from flagon.backends.db_django.models import FlagonParams, FlagonFeature
@@ -31,11 +32,13 @@ from flagon.backends.db_django.models import FlagonParams, FlagonFeature
 def enable_features(modeladmin, request, queryset):
     queryset.update(active=True)
 
+
 enable_features.short_description = 'Enable Features'
 
 
 def disable_features(modeladmin, request, queryset):
     queryset.update(active=False)
+
 
 disable_features.short_description = 'Disable Features'
 
