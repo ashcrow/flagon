@@ -5,7 +5,7 @@ include setup.py
 include AUTHORS
 include VERSION
 include CONTRIBUTING.md
-include test_requirements.txt
+include test-requirements.txt
 recursive-include test *
 recursive-include example *
 recursive-include doc *
