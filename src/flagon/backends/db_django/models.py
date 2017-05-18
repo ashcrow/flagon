@@ -22,6 +22,9 @@
 """
 Database models.
 """
+
+import six
+
 from django.db import models
 
 
@@ -36,7 +39,7 @@ class FlagonParams(models.Model):
         choices=(('bool', 'bool'), ('int', 'int'), ('str', 'str')))
 
     def __repr__(self):
-        return unicode("%s=%s(%s)" % (self.key, self.type, self.value))
+        return six.u("%s=%s(%s)" % (self.key, self.type, self.value))
 
     __str__ = __repr__
 
@@ -51,6 +54,6 @@ class FlagonFeature(models.Model):
     params = models.ForeignKey(FlagonParams, null=True, blank=True)
 
     def __repr__(self):
-        return unicode(self.name)
+        return six.u(self.name)
 
     __str__ = __repr__

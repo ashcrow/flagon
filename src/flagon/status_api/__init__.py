@@ -26,7 +26,7 @@ import json
 
 from werkzeug.wrappers import Request, Response
 from werkzeug.routing import Map, Rule
-from werkzeug.exceptions import HTTPException, NotFound
+from werkzeug.exceptions import HTTPException
 
 from flagon.errors import UnknownFeatureError
 
@@ -63,7 +63,7 @@ class FlagonStatusAPI(object):
         try:
             endpoint, values = adapter.match()
             return getattr(self, endpoint)(request, **values)
-        except HTTPException, e:
+        except HTTPException as e:
             return e
 
     def __call__(self, environ, start_response):
