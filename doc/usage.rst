@@ -3,8 +3,17 @@ Usage
 
 Backends
 --------
-First thing to do is to choose a backend to use. A backend
+First thing to do is to choose a backend to use.
 
+- Django Database: db_django
+- Google Datastore: datastore
+- JSON File: jsonfile
+- Local Memory (testing): localmemory
+- Memcache: memcached
+- MongoDB: db_mongodb
+- Redis Key/Value: redis_backend
+- SQL Database: db_sqlalchemy
+- Togglz File: togglzfile
 
 Crating the feature instance
 ----------------------------
@@ -28,7 +37,7 @@ Once a feature instance has been made it then can be used to tag callables as fe
 
    @feature('a feature')
    def say_something(data):
-       print data
+       print(data)
 
 Now that the function ``say_something`` has been tagged with the feature ``a feature`` it will only execute if ``a feature`` is set active.
 
@@ -48,8 +57,8 @@ Feature instance can also define defaults. Defaults are callables that will call
 .. code-block:: python
 
    def yell(data):
-       print data.upper()
+       print(data.upper())
 
    @feature('this feature is off', default=yell)
    def say_something(data):
-       print data
+       print(data)

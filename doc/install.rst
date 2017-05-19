@@ -10,6 +10,15 @@ Flagon can be installed via the normal pip command syntax.
    $ pip install flagon
 
 
+source
+------
+Flagon can be installed via ``setup.py`` in the source directory:
+
+.. code-block:: bash
+
+   $ python setup.py install
+
+
 rpm
 ---
 For RPM based systems an RPM can be generated.

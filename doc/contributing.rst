@@ -8,7 +8,7 @@ Contributing
 Guidelines
 ----------
 Please conform to the
-`pep8 <http://legacy.python.org/dev/peps/pep-0008/>`_) specification for
+`pep8 <https://www.python.org/dev/peps/pep-0008/>`_) specifica8tion for
 code formatting.
 
 
