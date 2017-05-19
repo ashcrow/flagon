@@ -21,14 +21,13 @@
 # IN THE SOFTWARE.
 
 from . import TestCase
-from flagon.backends.datastore import DatastoreBackend, FeatureToggle
-
-from google.appengine.ext import ndb
-from google.appengine.ext import testbed
 
 import unittest
 
 try:
+    from google.appengine.ext import ndb
+    from google.appengine.ext import testbed
+    from flagon.backends.datastore import DatastoreBackend, FeatureToggle
     from flagon.backends.google_cloud_datastore import AppEngineDatastoreBackend, FeatureToggle
     from google.appengine.ext import ndb
     from google.appengine.ext import testbed
