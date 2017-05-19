@@ -24,6 +24,8 @@
 Example
 """
 
+from __future__ import print_statement
+
 # Make a logger
 import logging
 logger = logging.getLogger('flagon')
@@ -47,30 +49,30 @@ feature = Feature(backend, logger)
 
 @feature('test')
 def t(a):
-    print "FROM t()", a
+    print("FROM t()", a)
 
-print "\n* Executing feature 'test' with 'asd': "
+print("\n* Executing feature 'test' with 'asd': ")
 t('asd')
 
 
 @feature('off')
 def o(a):
-    print "FROM a()", a
+    print("FROM a()", a)
 
 
 @feature('withdefault', default=t)
 def v(a):
-    print "FROM v()", a
+    print("FROM v()", a)
 
-print "\n* Executing feature 'off' (which is turned off) with 'asd'"
+print("\n* Executing feature 'off' (which is turned off) with 'asd'")
 try:
     o('asd')
 except NameError, ne:
-    print type(ne), ne
+    print(type(ne), ne)
 
-print (
+print(
     "\n* Executing feature 'withdefault' (which is turned off) "
     "which passed a default implementation of the t function.")
 v('asd')
 
-print "\n* Defining 'doesnotexist' (which is not a configured feature)"
+print("\n* Defining 'doesnotexist' (which is not a configured feature)")
