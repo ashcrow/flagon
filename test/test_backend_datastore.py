@@ -26,7 +26,18 @@ from flagon.backends.datastore import DatastoreBackend, FeatureToggle
 from google.appengine.ext import ndb
 from google.appengine.ext import testbed
 
+import unittest
 
+try:
+    from flagon.backends.google_cloud_datastore import AppEngineDatastoreBackend, FeatureToggle
+    from google.appengine.ext import ndb
+    from google.appengine.ext import testbed
+    HAS_APPENGINE_SDK = True
+except ImportError:
+    HAS_APPENGINE_SDK = False
+
+
+@unittest.skipUnless(HAS_APPENGINE_SDK, "Requires Appengine Python SDK")
 class TestAppengineDatastoreBackend(TestCase):
     """
     Test the mongo database backend class.

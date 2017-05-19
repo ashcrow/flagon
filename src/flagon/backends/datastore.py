@@ -22,7 +22,7 @@
 """
 Appengine Datastore backend.
 """
-import ndb
+from google.appengine.ext import ndb
 
 from flagon import errors
 from flagon.backends import Backend
