@@ -6,7 +6,7 @@ Backends
 First thing to do is to choose a backend to use.
 
 - Django Database: db_django
-- Google Datastore: datastore
+- Google Datastore: google_cloud_datastore
 - JSON File: jsonfile
 - Local Memory (testing): localmemory
 - Memcache: memcached
